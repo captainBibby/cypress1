@@ -12,6 +12,7 @@ describe("registration test", () => {
             Math.floor(Math.random() * charactersLength)
           );
         }
+        
         return result;
       }
       let email = `${makeId(5)}@test.com`;
