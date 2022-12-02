@@ -1,0 +1,19 @@
+{
+    "Login": {
+        "loginButton": "a[href='/login']"
+    },
+
+    "Register": {
+        "registerButton": "a[href='/register']",
+        "firstNameInput": "#first-name",
+        "lastNameInput": "#last-name",
+        "passwordConfirmInput": "#password-confirmation",
+        "checkbox": "input[type='checkbox']"
+    },
+
+    "Common": {
+        "emailInput": "#email",
+        "passwordInput": "#password",
+        "submitButton": "button"
+    }
+}
