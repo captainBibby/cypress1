@@ -15,5 +15,9 @@
         "emailInput": "#email",
         "passwordInput": "#password",
         "submitButton": "button"
+    },
+
+    "Logout": {
+        "logoutButton": ".nav-link"
     }
 }
