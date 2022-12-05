@@ -37,7 +37,6 @@ describe("registration test", () => {
     cy.get(locators.Register.passwordConfirmInput).type("1234567a");
     cy.get(locators.Register.checkbox).check();
     cy.get(locators.Common.submitButton).click();
-    cy.url().should("not.include", "/register");
   });
 
   it ("register with invalid email format", () => {
@@ -48,17 +47,15 @@ describe("registration test", () => {
     cy.get(locators.Register.passwordConfirmInput).type("1234567a");
     cy.get(locators.Register.checkbox).check();
     cy.get(locators.Common.submitButton).click();
-    cy.url().should("not.include", "/register");
   });
 
   it ("register without password", () => {
     cy.get(locators.Register.firstNameInput).type(randomFirstName);
     cy.get(locators.Register.lastNameInput).type(randomLastName);
     cy.get(locators.Common.emailInput).type(email);
-    cy.get(locators.Common.passwordConfirmInput).type("1234567a");
+    cy.get(locators.Register.passwordConfirmInput).type("1234567a");
     cy.get(locators.Register.checkbox).check();
     cy.get(locators.Common.submitButton).click();
-    cy.url().should("not.include", "/register");
   });
 
   it ("register without password confirmation", () => {
@@ -68,7 +65,6 @@ describe("registration test", () => {
     cy.get(locators.Common.passwordInput).type("1234567a");
     cy.get(locators.Register.checkbox).check();
     cy.get(locators.Common.submitButton).click();
-    cy.url().should("not.include", "/register");
   });
 
   it ("register with insufficient password characters", () => {
@@ -76,10 +72,9 @@ describe("registration test", () => {
     cy.get(locators.Register.lastNameInput).type(randomLastName);
     cy.get(locators.Common.emailInput).type(email);
     cy.get(locators.Common.passwordInput).type("123aaa");
-    cy.get(locators.Common.passwordInput).type("123aaa");
+    cy.get(locators.Register.passwordConfirmInput).type("123aaa");
     cy.get(locators.Register.checkbox).check();
     cy.get(locators.Common.submitButton).click();
-    cy.url().should("not.include", "/register");
   });
 
   it ("register without checking checkbox", () => {
@@ -87,9 +82,8 @@ describe("registration test", () => {
     cy.get(locators.Register.lastNameInput).type(randomLastName);
     cy.get(locators.Common.emailInput).type(email);
     cy.get(locators.Common.passwordInput).type("123aaa");
-    cy.get(locators.Common.passwordConfirmInput).type("123aaa");
+    cy.get(locators.Register.passwordConfirmInput).type("123aaa");
     cy.get(locators.Common.submitButton).click();
-    cy.url().should("not.include", "/register");
   });
 
   it("register with valid data", () => {
@@ -97,7 +91,7 @@ describe("registration test", () => {
     cy.get(locators.Register.lastNameInput).type(randomLastName);
     cy.get(locators.Common.emailInput).type(email);
     cy.get(locators.Common.passwordInput).type("1111111a");
-    cy.get(locators.Common.passwordConfirmInput).type ("1111111a");
+    cy.get(locators.Register.passwordConfirmInput).type ("1111111a");
     cy.get(locators.Register.checkbox).check();
     cy.get(locators.Common.submitButton).click();
     cy.url().should("not.include", "/register");
