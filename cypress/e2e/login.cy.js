@@ -13,6 +13,8 @@ describe ("login test", () => {
 
     it ("logout", () => {
         cy.get(locators.Header.logoutButton).should("have.length", 4); //ceka dok ne ucita 4 elementa
-        cy.get(locators.Header.logoutButton).eq(3).click();
+        cy.get(locators.Header.logoutButton).eq(3).click(); 
     });
 });
+
+//git pravi problem
