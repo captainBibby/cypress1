@@ -1,6 +1,7 @@
 {
-    "Login": {
-        "loginButton": "a[href='/login']"
+    "Header": {
+        "loginButton": "a[href='/login']",
+        "logoutButton": ".nav-link"
     },
 
     "Register": {
@@ -15,9 +16,5 @@
         "emailInput": "#email",
         "passwordInput": "#password",
         "submitButton": "button"
-    },
-
-    "Logout": {
-        "logoutButton": ".nav-link"
     }
 }
