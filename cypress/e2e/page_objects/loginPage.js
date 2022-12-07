@@ -11,10 +11,18 @@ class LoginPage {
         return cy.get("button");
     }
 
+    get alertMessage() {
+        return cy.get(".alert")
+    }
+
+    get loginHeading() {
+        return cy.get("h1")
+    }
+
     login (email, password) {
         this.emailInput.type(email);
         this.passwordInput.type(password);
-        this.submitButton.click()
+        this.submitButton.click();
     }
 }
 

@@ -1,17 +1,26 @@
 /// <reference types="Cypress"/>
 
 import {navigation} from './page_objects/navigation'
-import {loginPage, LoginPage} from './page_objects/loginPage'
+import {loginPage} from './page_objects/loginPage'
 
 describe ("login test", () => {
 
-    beforeEach (() => {
+    beforeEach ("login test", () => {
         cy.visit("/");
-        navigation.clickLoginButton()
+        loginPage.loginHeading.should("be.visible")
+        .and("have.text", "Please login");
     })
 
-    it ("login with invalid email", () => {
-        loginPage.login("error@", "1111111a")
+    it.only ("login with invalid email", () => {
+        loginPage.login("error@gmail.com", "1111111a");
+        loginPage.alertMessage.should("be.visible");
+        loginPage.alertMessage.should("have.text", "Bad Credentials");
+        loginPage.alertMessage.should(
+        "have.css",
+        "background-color:", 
+        "rgb(114, 28, 36)"
+        );
+        cy.url().should("include", "login");
     })
 
     it ("login with invalid password", () => {

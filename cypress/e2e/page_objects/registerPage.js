@@ -27,6 +27,10 @@ class RegisterPage {
         return cy.get("button");
     }
 
+    get alertMessage() {
+        return cy.get(".alert")
+    }
+
     register (firstName, lastName, email, password, passwordConfirmation) {
         this.firstNameInput.type(firstName);
         this.lastNameInput.type(lastName);
