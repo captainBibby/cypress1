@@ -41,4 +41,19 @@ describe ("login test", () => {
         cy.get(locators.Header.logoutButton).should("have.length", 4); //ceka dok ne ucita 4 elementa
         cy.get(locators.Header.logoutButton).eq(3).click(); 
     });
+
+    it.only ("login via backend", () => {
+        cy.request(
+            "POST",
+            "https://gallery-api.vivifyideas.com/api/auth/login",
+            {
+                email: "bibi@gmail.com",
+                password: "1111111a"
+            }
+        ).its('body').then( response => {
+            //console.log("RESPONSE", response);
+            window.localStorage.setItem("token", response.access_token);
+        });
+        cy.visit("/create")
+    })
 });

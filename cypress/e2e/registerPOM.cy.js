@@ -2,6 +2,7 @@
 
 import { faker } from "@faker-js/faker";
 import { registerPage } from "./page_objects/registerPage";
+import { loginPage } from "./page_objects/loginPage";
 
 describe("register POM", () => {
   let randomUser = {
@@ -29,7 +30,7 @@ describe("register POM", () => {
     cy.url().should("include", "/register");
   });
 
-  it.only("register with existing email", () => {
+  it("register with existing email", () => {
     registerPage.register(
       randomUser.randomFirstName,
       randomUser.randomLastName,
@@ -46,7 +47,7 @@ describe("register POM", () => {
     cy.url().should("include", "/register");
   });
 
-  it.only("register with wrong password confirmation", () => {
+  it("register with wrong password confirmation", () => {
     registerPage.register(
       randomUser.randomFirstName,
       randomUser.randomLastName,
@@ -77,4 +78,23 @@ describe("register POM", () => {
     cy.url().should("not.include", "/register");
   });
 
+  it.only ("register via backend", () => {
+    cy.request(
+        "POST",
+        "https://gallery-api.vivifyideas.com/api/auth/register",
+        {
+            email: randomUser.randomEmail,
+            first_name: randomUser.randomFirstName,
+            last_name: randomUser.randomLastName,
+            password: randomUser.randomPassword,
+            password_confirmation: randomUser.randomPassword,
+            terms_and_condititons: true
+        }
+    ).its('body').then( response => {
+        //console.log("RESPONSE", response);
+        window.localStorage.setItem("token", response.access_token);
+    });
+    cy.visit("/login");
+    loginPage.login(randomUser.randomEmail, randomUser.randomPassword)
+  })
 });
