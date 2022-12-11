@@ -47,8 +47,8 @@ describe ("login test", () => {
         });
         cy.url().should("not.include", "/login");
         navigation.logoutButton.should('be.visible');
-        navigation.clickLogoutButton();
-        navigation.logoutButton.should('not.exist');
+        //navigation.clickLogoutButton();
+        //navigation.logoutButton.should('not.exist');
       });
 
     it.only ("login via backend", () => {

@@ -11,6 +11,10 @@ class Navigation {
         return cy.get("a[href='/register']")
     }
 
+    get createGalleryButton() {
+        return cy.get(".ml-auto > :nth-child(2) > .nav-link")
+    }
+
     clickLoginButton () {
         this.loginButton.click()
     }
@@ -22,6 +26,11 @@ class Navigation {
     clickRegisterButton () {
         this.registerButton.click()
     }
+
+    clickCreateGalleryButton () {
+        this.createGalleryButton.click()
+    }
+
 }
 
 export const navigation = new Navigation();

@@ -33,6 +33,6 @@ Cypress.Commands.add("loginViaBackend", () =>{
           password: Cypress.env("userPassword"),
         }
       ).its('body').then((response) =>{
-        window.localStorage.setItem("token", response.acces_token);
+        window.localStorage.setItem("token", response.access_token);
       });
 })

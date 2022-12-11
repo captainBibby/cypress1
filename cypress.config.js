@@ -7,8 +7,8 @@ module.exports = defineConfig({
     },
     baseUrl: "https://gallery-app.vivifyideas.com",
     env: {
-      userEmail: "bibi@gmail.com",
-      userPassword: "1111111a"
+      userEmail: "jarvis@stark.com",
+      userPassword: "Test1234"
     }
   },
 });
