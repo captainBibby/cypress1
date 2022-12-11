@@ -7,10 +7,10 @@ describe ("login test", () => {
 
     beforeEach ("login test", () => {
         cy.visit("/");
+        cy.url().should('include', 'gallery-app');
+        navigation.clickLoginButton();
+        cy.url().should('include', '/login');
         
-        loginPage.loginHeading.should("be.visible")
-        .and("have.text", "All Galleries");
-        loginPage.loginButton.click();
         loginPage.loginHeading.should("be.visible")
         .and("have.text", "Please login");
     })
@@ -46,6 +46,9 @@ describe ("login test", () => {
           expect(interception.response.body.access_token).to.exist;
         });
         cy.url().should("not.include", "/login");
+        navigation.logoutButton.should('be.visible');
+        navigation.clickLogoutButton();
+        navigation.logoutButton.should('not.exist');
       });
 
     it.only ("login via backend", () => {
