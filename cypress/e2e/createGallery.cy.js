@@ -12,24 +12,63 @@ describe("crete gallery page test", function () {
         galeryTiltle: faker.animal.cat(),
         galleryDescription: faker.lorem.words(5),
         galleryImage: "https://upload.wikimedia.org/wikipedia/commons/a/a3/June_odd-eyed-cat.jpg",
-        invalidGalleryImage: "test image"
+        invalidGalleryImage: "https://media.tenor.com/7r-BGEoIohkAAAAM/meme-cat.gif"
     }
+
+    let date = new Date();
+    date.toString();
 
     before ("create new gallery", () => {
         cy.loginViaBackend();
         cy.visit('/create')
     });
 
-    // it ("visit default URL", () => {
-    //     cy.visit("/");
-    //     navigation.loginButton.should("not.exist");
-    // });
+    it ("visit default URL", () => {
+        navigation.loginButton.should("not.exist");
+    });
 
-    it ("create new gallery with valid data", () => {
+    it.only ("create new gallery with valid data", () => {
+
+        cy.intercept(
+            "POST",
+            " https://gallery-api.vivifyideas.com/api/galleries"
+        ).as("successfullyCreatedGallery");
+
+        createGalleryPage.createGallery(
+            gallery.galeryTiltle,
+            gallery.galleryDescription,
+            gallery.galleryImage
+        );
+
+        cy.wait("@successfullyCreatedGallery").then ((interception) => {
+            cy.log(JSON.stringify(interception.response));
+            expect(interception.response.statusCode).eq(201);
+            expect(interception.response.body).to.exist;
+            expect(interception.response.body.created_at.toString()).eq(date);
+        })
+    })
+
+    it ("create new gallery with two images", () => {
         createGalleryPage.createGallery(
             gallery.galeryTiltle,
             gallery.galleryDescription,
             gallery.galleryImage
         );
     })
+
+    it ("create new gallery with invalid img format", () => {
+        
+        createGalleryPage.createGallery(
+            gallery.galeryTiltle,
+            gallery.galleryDescription,
+            gallery.invalidGalleryImage
+        );
+        
+        createGalleryPage.alertMessage.should("be.visible")
+        .and ("have.text", "Wrong format of image")
+        .and ("have.css",
+        "background-color",
+        "rgb(248, 215, 218)");
+    })
+
 })

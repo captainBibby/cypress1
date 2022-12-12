@@ -24,6 +24,10 @@ class CreateGalleryPage {
         return cy.get("button").eq(-2)
     }
 
+    get alertMessage(){
+        return cy.get(".alert");
+    }
+
     createGallery (title, description, imageUrl) {
         this.tilteInput.type(title);
         this.descriptionInput.type(description);

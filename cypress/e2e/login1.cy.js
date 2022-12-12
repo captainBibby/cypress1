@@ -50,9 +50,4 @@ describe ("login test", () => {
         //navigation.clickLogoutButton();
         //navigation.logoutButton.should('not.exist');
       });
-
-    it.only ("login via backend", () => {
-        cy.loginViaBackend();
-        cy.visit("/create")
-    })
 });
